@@ -1,20 +1,19 @@
-import { useState } from 'react'
-import './App.css'
-import ExpenseForm from './components/ExpenseForm';
-import ExpenseTable from './components/ExpenseTable';
-import expenseData from './expenseData';
-function App() {
-    const [expenses, setExpenses] = useState(expenseData)
-    return (
-        <main>
-            <h1>Track Your Expense</h1>
-            <div className="expense-tracker">
-                <ExpenseForm setExpenses={setExpenses} />
-                <ExpenseTable expenses={expenses}/>
-            </div>
-        </main>
-    )
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './components/Header/Header';
+import { Outlet } from "react-router-dom";
 
+
+
+function App() {
+    return (
+        <div >
+            <Header />
+            <div className='mt-5'>
+            <Outlet />
+            </div>
+        </div>
+    );
 }
 
-export default App
+export default App;

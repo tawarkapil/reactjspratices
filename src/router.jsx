@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import ContextMenu from "./components/ContextMenu";
 import Expense from "./components/Expense";
 import ExpenseFormUseRef from "./components/ExpenseFormUseRef";
+import ExpenseFormValidation from "./components/ExpenseFormValidation";
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
                 path: "/useRef",
                 element: <ExpenseFormUseRef />,
             },
+            {
+                path:'/from-validation',
+                element:<ExpenseFormValidation />
+            }
         ],
     },
 ]);

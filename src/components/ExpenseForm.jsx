@@ -1,12 +1,13 @@
 
 export default function ExpenseForm({ setExpenses }) {
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         const expense = { ...getFrom(e.target), id: crypto.randomUUID() }
         setExpenses((pre) => [...pre, expense]);
         e.target.reset()
     }
-
+    
     const getFrom = (from) => {
         const fromData = new FormData(from);
         const data = {};
@@ -15,6 +16,7 @@ export default function ExpenseForm({ setExpenses }) {
         }
         return data;
     }
+    
     return (
         <form className="expense-form" onSubmit={handleSubmit}>
             <div className="input-container">

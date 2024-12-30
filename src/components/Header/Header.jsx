@@ -38,6 +38,12 @@ const Header = () => {
                     </li>
 
                     <li className="nav-item">
+                        <Link className="nav-link" to="/from-validation">
+                            Validation
+                        </Link>
+                    </li>
+
+                    <li className="nav-item">
                         <a className="nav-link disabled" href="#">
                             Disabled
                         </a>

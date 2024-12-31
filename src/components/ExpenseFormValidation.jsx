@@ -2,6 +2,7 @@ import { useState } from "react"
 import expenseData from "../expenseData";
 import ExpenseTable from "./ExpenseTable";
 import Input from "./Common/Input";
+import Select from "./Common/Select";
 
 export default function ExpenseFormValidation() {
 
@@ -14,19 +15,41 @@ export default function ExpenseFormValidation() {
     });
 
     const [errors, setErrors] = useState({})
+    
+    const validationConfig = {
+        title: [
+          { required: true, message: 'Please enter title' },
+          { minLength: 5, message: 'Title should be at least 5 characters long' },
+        ],
+        category: [{ required: true, message: 'Please select a category' }],
+        amount: [{ required: true, message: 'Please enter an amount' }],
+        email: [
+          { required: true, message: 'Please enter an email' },
+          {
+            pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+            message: 'Please enter a valid email',
+          },
+        ],
+    }
 
     const validate = (fromData) => {
-        console.log(fromData)
         const errorData = {}
-        if (!fromData.title) {
-            errorData.title = 'Title Is Required';
-        }
-        if (!fromData.category) {
-            errorData.category = 'Please Select a Category';
-        }
-        if (!fromData.amount) {
-            errorData.amount = 'amount is required';
-        }
+        Object.entries(fromData).forEach(([key, value]) => {
+            validationConfig[key].some((rule) =>{
+                if(rule.required && !value){
+                    errorData[key] = rule.message;
+                    return true;
+                }
+                if(rule.minLength && value.length < 5 ){
+                   errorData[key] =  rule.message;
+                   return true;
+                }
+                if(rule.pattern && !rule.pattern.test(value)){
+                    errorData[key] = rule.message;
+                    return true;
+                }
+            })
+        });
         setErrors(errorData);
         return errorData;
     }
@@ -45,11 +68,13 @@ export default function ExpenseFormValidation() {
             category: '',
             amount: ''
         })
-        setErrors({});
+        //setErrors({});
     }
 
     const handleChange = (e) => {
-        setExpense((preState) => ({ ...preState, title: e.target.value }))
+        const { name,value } = e.target;
+        setExpense((preState) => ({ ...preState,[name]:value}))
+        setErrors((preState) => ({ ...preState,[name]:''}));
     }
 
     return (
@@ -65,20 +90,16 @@ export default function ExpenseFormValidation() {
                         onChange={handleChange}
                         error={errors.title}
                     />
-                    <div className="input-container">
-                        <label htmlFor="category">Category</label>
-                        <select id="category" name="category" onChange={(e) => setExpense((preState) => ({ ...preState, category: e.target.value }))}>
-                            <option value="" hidden>
-                                Select Category
-                            </option>
-                            <option value="grocery">Grocery</option>
-                            <option value="clothes">Clothes</option>
-                            <option value="bills">Bills</option>
-                            <option value="education">Education</option>
-                            <option value="medicine">Medicine</option>
-                        </select>
-                        <p className='error'>{errors.category}</p>
-                    </div>
+                   <Select
+                       label="Category"
+                       id="category"
+                       name="category"
+                       value={expense.category}
+                       onChange={handleChange}
+                       options={['Grocery', 'Clothes', 'Bills', 'Education', 'Medicine']}
+                       defaultOption="Select Category"
+                       error={errors.category}
+                    />
                     <Input 
                         label='Amount'
                         id='amount'

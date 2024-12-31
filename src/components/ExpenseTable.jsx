@@ -1,13 +1,19 @@
+import { useFilter } from "../Hooks/useFilter";
 
 
 const ExpenseTable = ({expenses}) => {
+    
+    const [result,setQuery] = useFilter(expenses , (data)=>data.category); 
+    
+    const total = result.reduce((accumulater,current)=> (accumulater + parseInt(current.amount)),0)
+
     return (
         <table className="expense-table">
             <thead>
                 <tr>
                     <th>Title</th>
                     <th>
-                        <select>
+                        <select onChange={(e)=>setQuery(e.target.value)}>
                             <option value="">All</option>
                             <option value="grocery">Grocery</option>
                             <option value="clothes">Clothes</option>
@@ -42,7 +48,7 @@ const ExpenseTable = ({expenses}) => {
                 </tr>
             </thead>
             <tbody>
-                {expenses.map(({ id, title, category, amount }) => (
+                {result.map(({ id, title, category, amount }) => (
                     <tr key={id}>
                         <td>{title}</td>
                         <td>{category}</td>
@@ -52,7 +58,7 @@ const ExpenseTable = ({expenses}) => {
                 <tr>
                     <th>Total</th>
                     <th></th>
-                    <th>₹8100</th>
+                    <th>₹{total}</th>
                 </tr>
             </tbody>
         </table>

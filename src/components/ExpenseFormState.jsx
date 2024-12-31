@@ -11,7 +11,7 @@ export default function ExpenseFormstate({ setExpenses }) {
     const [errors ,setErrors] = useState({})
 
     const validate = (fromData) => {
-        console.log(fromData)
+        // console.log(fromData)
         const errorData = {}
         if(!fromData.title){
             errorData.title = 'Title Is Required';

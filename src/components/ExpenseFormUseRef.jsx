@@ -58,7 +58,7 @@ export default function ExpenseFormUseRef() {
                     </div>
                     <button className="add-btn">Add</button>
                 </form>
-                <ExpenseTable expenses={expenses} />
+                <ExpenseTable expenses={expenses} setExpenses={setExpenses} />
             </div>
         </main>
     );

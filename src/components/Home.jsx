@@ -10,7 +10,7 @@ const Home = () => {
             <h1>Track Your Expense</h1>
             <div className="expense-tracker">
                 <ExpenseForm setExpenses={setExpenses} />
-                <ExpenseTable expenses={expenses}/>
+                <ExpenseTable expenses={expenses} setExpenses={ExpenseTable}/>
             </div>
         </main>
     )

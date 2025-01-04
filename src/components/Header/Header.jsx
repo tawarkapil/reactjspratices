@@ -43,10 +43,10 @@ const Header = () => {
                         </Link>
                     </li>
 
-                    <li className="nav-item">
-                        <a className="nav-link disabled" href="#">
-                            Disabled
-                        </a>
+                    <li className="nav-item active">
+                        <Link className="nav-link" to="/hoc">
+                            HOC 
+                        </Link>
                     </li>
                 </ul>
             </div>

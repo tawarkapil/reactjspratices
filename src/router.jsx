@@ -12,6 +12,7 @@ import ExpenseFormValidation from "./components/ExpenseFormValidation";
 import MemoParentComponent from "./components/HookSPectices/useMemo/MemoParentComponent";
 import UseCallback from "./components/HookSPectices/useCallback/UseCallback";
 import StudentOne from "./components/Hoc/StudentOne";
+import DataShow from "./components/DataShow";
 import { lazy } from "react";
 
 const Expense = lazy(() => import('./components/Expense'));
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
             {
                 path: '/high',
                 element: <StudentOne />
+            },
+            {
+                path: '/data-show',
+                element: <DataShow />
             },
         ],
     },

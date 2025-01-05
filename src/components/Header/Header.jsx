@@ -42,6 +42,11 @@ const Header = () => {
                             Validation
                         </Link>
                     </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/data-show">
+                            Data show
+                        </Link>
+                    </li>
 
                     <li className="nav-item active">
                         <Link className="nav-link" to="/hoc">

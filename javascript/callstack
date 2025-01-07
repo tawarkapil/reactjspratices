@@ -1,0 +1,5 @@
+
+
+Q: What is the call stack?
+A: Call stack is a data structure used by JavaScript to manage the execution of functions. It follows the LIFO (Last In, First Out) principle.
+---------------------------------------------------------------------------------------------------------------
